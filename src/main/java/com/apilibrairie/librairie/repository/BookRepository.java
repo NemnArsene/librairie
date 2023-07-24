@@ -1,8 +1,8 @@
-package com.apilibrairie.repository;
+package com.apilibrairie.librairie.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.apilibrairie.model.Book;
+import com.apilibrairie.librairie.model.Book;
 
 //class BookDao
 public interface BookRepository extends JpaRepository<Book, Long> {
