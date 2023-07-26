@@ -1,6 +1,7 @@
 package com.apilibrairie.librairie.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
+    // creation des variables pour personnaliser les erreurs
     private String resourceName;
     private String fieldName;
     private Object fieldValue;
@@ -14,6 +15,12 @@ public class ResourceNotFoundException extends RuntimeException {
         this.fieldValue = fieldValue;
     }
 
+    // variable message pour personnaliser les messages d'erreurs
+    public ResourceNotFoundException(String message) {
+        super(message);
+    }
+
+    // getters
     public String getResourceName() {
         return resourceName;
     }
@@ -25,5 +32,4 @@ public class ResourceNotFoundException extends RuntimeException {
     public Object getFieldValue() {
         return fieldValue;
     }
-
 }

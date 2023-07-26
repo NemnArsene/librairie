@@ -27,19 +27,19 @@ public class BookController {
         BookService = bookService;
     }
 
-    // build create book apiRest
+    // methode pour enregistrer un livre dans la bd
     @PostMapping()
     public ResponseEntity<Book> saveBook(@RequestBody Book book) {
         return new ResponseEntity<Book>(BookService.saveBook(book), HttpStatus.CREATED);
     }
 
-    // build get all books apiRest
+    // methode pour afficher tous les livres
     @GetMapping
     public List<Book> getAllBooks() {
         return BookService.getAllBooks();
     }
 
-    // buid get book by id
+    // methode de recuperation d'un livre
     // http://localhost:8080/api/books/1
     @GetMapping("{id}")
     public ResponseEntity<Book> getBookEntityById(@PathVariable("id") long bookId) {
@@ -47,20 +47,20 @@ public class BookController {
 
     }
 
-    // build update book apiRest
+    // methode de MAJ
     // http://localhost:8080/api/books/1
     @PutMapping("{id}")
     public ResponseEntity<Book> updateBook(@PathVariable("id") long id, @RequestBody Book book) {
         return new ResponseEntity<Book>(BookService.updateBook(book, id), HttpStatus.OK);
 
     }
-    // build delete book apiRest
+    // mehtode de suppression
     // http://localhost:8080/api/books/1
 
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteBook(@PathVariable("id") long id) {
         BookService.deleteBook(id);
-        return new ResponseEntity<String>("Books delete successfully!", HttpStatus.OK);
+        return new ResponseEntity<String>("Book delete successfully!", HttpStatus.OK);
 
     }
 

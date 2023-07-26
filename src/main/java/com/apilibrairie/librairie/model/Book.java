@@ -7,8 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
- * 
+ * table model pour migrer la base de donnee et creation de la table book en
+ * utilisant ENTITY
  */
 
 @Entity
@@ -16,6 +19,7 @@ import javax.persistence.Table;
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("id")
     private Long id;
 
     @Column(name = "title", nullable = false)
@@ -30,6 +34,12 @@ public class Book {
     @Column(name = "isbn")
     private String isbn;
 
+    // Constructeur sans parametres
+    public Book() {
+
+    }
+
+    // Constructeur avec parametres
     public Book(Long id, String title, String author, int publicationYear, String isbn) {
         this.id = id;
         this.title = title;
@@ -38,10 +48,7 @@ public class Book {
         this.isbn = isbn;
     }
 
-    public Book() {
-        // Constructeur par défaut sans arguments
-    }
-
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -82,10 +89,15 @@ public class Book {
         this.isbn = isbn;
     }
 
+    // Methode to String
     @Override
     public String toString() {
         return "Book [id=" + id + ", title=" + title + ", author=" + author + ", publicationYear=" + publicationYear
                 + ", isbn=" + isbn + "]";
+    }
+
+    public Object thenReturn(Book bookToUpdate) {
+        return null;
     }
 
 }

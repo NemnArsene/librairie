@@ -22,7 +22,16 @@ public class BookServiceImplement implements BookService {
 
     @Override
     public Book saveBook(Book book) {
-        return bookRepository.save(book);
+        // verification de l'existance de l'attribut Isbn dans la bd
+        if (bookRepository.findByIsbn(book.getIsbn()) != null) {
+
+            // s'il existe renvois le message d'erreur
+            throw new ResourceNotFoundException("A book with this ISBN already exists in the database.");
+        } else {
+
+            // s'il existe applique la methode saveBook
+            return bookRepository.save(book);
+        }
     }
 
     @Override
@@ -45,7 +54,8 @@ public class BookServiceImplement implements BookService {
 
     @Override
     public Book updateBook(Book book, long id) {
-        // we need to check whether book with given id is exist in DB or not
+
+        // verification du livre a modifier dans la db
         Book existingBook = bookRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Book", "Id", id));
 
@@ -54,7 +64,7 @@ public class BookServiceImplement implements BookService {
         existingBook.setPublicationYear(book.getPublicationYear());
         existingBook.setIsbn(book.getIsbn());
 
-        // save exiting book to Db
+        // application de la methode saveBook
         bookRepository.save(existingBook);
 
         return existingBook;
